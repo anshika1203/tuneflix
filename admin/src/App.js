@@ -7,6 +7,7 @@ import {
   Switch,
   Route,
   Redirect,
+  useHistory
 } from "react-router-dom";
 import UserList from "./pages/userList/UserList";
 import User from "./pages/user/User";
@@ -22,7 +23,15 @@ import { Movie } from "@material-ui/icons";
 import NewMovie from "./pages/newMovie/NewMovie";
 
 function App() {
+  //const history = useHistory();
   const { user } = useContext(AuthContext);
+  const isAdmin = localStorage.getItem('user');
+  console.log(isAdmin, "isAdmin");
+  if(isAdmin === 'null') {
+    console.log('hii')
+    window.location.replace('localhost:4000/login')
+   //window.location.href('/login');
+  }
   return (
     <Router>
       <Switch>

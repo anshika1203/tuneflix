@@ -13,23 +13,26 @@ router.get("/getList", verify, async (req, res) => {
   console.log(typeQuery, genreQuery);
   let list = [];
   try {    
-    list = await List.aggregate([
-      { $sample: { size: 10 } },
-      { $match: { type: typeQuery, genre: genreQuery } },
-    ]);
+    // list = await List.aggregate([
+    //   { $sample: { size: 10 } },
+    //   { $match: { type: typeQuery, genre: genreQuery } },
+    // ]);
     console.log(list);
-    // if (typeQuery) {
-    //   if (genreQuery) {
-        
-    //   } else {
-    //     list = await List.aggregate([
-    //       { $sample: { size: 10 } },
-    //       { $match: { type: typeQuery } },
-    //     ]);
-    //   }
-    // } else {
-    //   list = await List.aggregate([{ $sample: { size: 10 } }]);
-    // }
+    if (typeQuery) {
+      if (genreQuery) {
+        list = await List.aggregate([
+            { $sample: { size: 10 } },
+            { $match: { type: typeQuery, genre: genreQuery } },
+          ]);
+      } else {
+        list = await List.aggregate([
+          { $sample: { size: 10 } },
+          { $match: { type: typeQuery } },
+        ]);
+      }
+    } else {
+      list = await List.aggregate([{ $sample: { size: 10 } }]);
+    }
     res.status(200).json(list);
   } catch (err) {
     res.status(500).json(err);
