@@ -14,6 +14,9 @@ export default function ListItem({ index, item }) {
   const [movie, setMovie] = useState({});
 
   useEffect(() => {
+    if(index === 1){
+      setMovie(item);
+    }else{
     const getMovie = async () => {
       try {
         const res = await axios.get("/movies/find/" + item, {
@@ -28,6 +31,7 @@ export default function ListItem({ index, item }) {
       }
     };
     getMovie();
+  }
   }, [item]);
 
   return (

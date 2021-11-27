@@ -1,14 +1,20 @@
 import Navbar from "../../components/navbar/Navbar";
 import Featured from "../../components/featured/Featured";
 import "./home.scss";
+import Searched from "../../components/search/Searched";
 import List from "../../components/list/List";
 import { useEffect, useState } from "react";
 import axios from "axios";
 
 const Home = ({ type }) => {
   const [lists, setLists] = useState([]);
+  const [searchLists, setSearchLists] = useState([]);
   const [genre, setGenre] = useState(null);
-  console.log("genre at home.jsx", genre);
+  
+  
+
+ 
+
   useEffect(() => {
     const getRandomLists = async () => {
       try {
@@ -45,10 +51,13 @@ const Home = ({ type }) => {
   }, [type, genre]);
 
   // console.log(lists, "--");
+
+  console.log("search at home.jsx", searchLists);
   return (
     <div className="home">
-      <Navbar />
+      <Navbar setSearchLists={setSearchLists}/>
       <Featured type={type} setGenre={setGenre} />
+      <Searched list={searchLists}/>
       {lists.map((list) => (
         <List list={list} />
       ))}

@@ -1,18 +1,46 @@
 import { ArrowDropDown, Notifications, Search } from "@material-ui/icons";
-import { useContext, useState } from "react";
+import { useContext, useState, useEffect } from "react";
 import "./navbar.scss";
 import { Link } from "react-router-dom";
 import { AuthContext } from "../../authContext/AuthContext";
 import { logout } from "../../authContext/AuthActions";
 import Logo from ".././../logo.png";
-const Navbar = () => {
+import axios from 'axios';
+
+const Navbar = ({ setSearchLists}) => {
   const [isScrolled, setIsScrolled] = useState(false);
   const { dispatch } = useContext(AuthContext);
-
+  const [search, setSearch] = useState('');
+  
   window.onscroll = () => {
     setIsScrolled(window.pageYOffset === 0 ? false : true);
     return () => (window.onscroll = null);
   };
+    const handleChange=(e)=>{
+        e.preventDefault();
+        console.log(e.target.value);
+        setSearch(e.target.value);
+    }
+ 
+  const getSearchCall = async() =>{
+
+    const res = await axios.get('movies/search',{
+      headers: {
+        token:
+        "Bearer "+JSON.parse(localStorage.getItem("user")).accessToken,
+      },
+      params: {
+        search
+      }
+    })
+    
+    console.log(res?.data, 'serach');
+    setSearchLists(res?.data);
+    setSearch('');
+  }
+ 
+
+ console.log(search);
   return (
     <div className={isScrolled ? "navbar scrolled" : "navbar"}>
       <div className="container">
@@ -29,8 +57,10 @@ const Navbar = () => {
           </Link>
         </div>
         <div className="right">
-          <Search className="icon" />
-         
+       
+        <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search" name="search" onChange={handleChange}/>
+        <button class="btn btn-outline-success my-2 my-sm-0"  onClick={getSearchCall}>Search</button>
+     
         
           <img
             src="https://images.pexels.com/photos/6899260/pexels-photo-6899260.jpeg?auto=compress&cs=tinysrgb&dpr=2&w=500"

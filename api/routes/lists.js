@@ -4,10 +4,12 @@ const verify = require("../verifyToken");
 
 
 
+
+
 // GET GENRE LIST 
 
 router.get("/getList", verify, async (req, res) => {
-  console.log("hiii", req);
+  
   const typeQuery = req.query.type;
   const genreQuery = req.query.genre;
   console.log(typeQuery, genreQuery);

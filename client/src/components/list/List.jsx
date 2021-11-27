@@ -25,10 +25,10 @@ export default function List({ list }) {
     }
   };
   
-  const unique = (value, index, self) => {
-    return self.indexOf(value) === index
-  }
-  const uniqueList = list.content.filter(unique);
+  // const unique = (value, index, self) => {
+  //   return self.indexOf(value) === index
+  // }
+  // const uniqueList = list?.content? list.content.filter(unique) : list;
   return (
     <div className="list">
       <span className="listTitle">{list.title}</span>
@@ -39,9 +39,9 @@ export default function List({ list }) {
           style={{ display: !isMoved && "none" }}
         />
         <div className="container" ref={listRef}>
-          {uniqueList.map((item, i) => (
+          {list?.content? list.content.map((item, i) => (
             <ListItem index={i} item={item} />
-          ))}
+          )): <ListItem index={1} item={list} />}
         </div>
         <ArrowForwardIosOutlined
           className="sliderArrow right"
