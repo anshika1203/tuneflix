@@ -58,7 +58,7 @@ const Navbar = ({ setSearchLists}) => {
         </div>
         <div className="right">
        
-        <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search" name="search" onChange={handleChange}/>
+        <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search" name="search" onChange={handleChange} value={search}/>
         <button class="btn btn-outline-success my-2 my-sm-0"  onClick={getSearchCall}>Search</button>
      
         
