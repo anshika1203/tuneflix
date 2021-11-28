@@ -1,5 +1,5 @@
 import React, { useContext } from "react";
-import { Layout, Row, Col, Card, Form, Input, Button, Select } from "antd";
+import { Layout, Row, Col, Card, Form, Input, Button, Select,Modal } from "antd";
 import "./newMovie.css";
 import { createMovie } from "../../context/movieContext/apiCalls";
 import { MovieContext } from "../../context/movieContext/MovieContext";
@@ -11,9 +11,15 @@ export default function NewMovie() {
 
   const onFinish = (values) => {
     createMovie(values, dispatch);
+    success();
     onReset();
   };
 
+  const success=()=> {
+    Modal.success({
+      content: 'Data Added Successfully...',
+    });
+  }
   const onReset = () => {
     form.resetFields();
   };

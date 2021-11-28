@@ -1,4 +1,5 @@
-import { InfoOutlined, PlayArrow } from "@material-ui/icons";
+import { PlayArrow } from "@material-ui/icons";
+import { PlayCircleFilled } from "@ant-design/icons";
 import axios from "axios";
 import { useEffect, useState } from "react";
 import "./featured.scss";
@@ -60,12 +61,10 @@ export default function Featured({ type, setGenre }) {
         <span className="desc">{content?.desc}</span>
         <div className="buttons">
           <button className="play">
-            <PlayArrow />
             <Link to={{ pathname: "/watch", movie: content }}>
-              <span>Play</span>
+              <PlayCircleFilled style={{ fontSize: 36, color: "red" }} />
             </Link>
           </button>
-        
         </div>
       </div>
     </div>

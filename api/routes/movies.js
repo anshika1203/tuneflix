@@ -2,33 +2,24 @@ const router = require("express").Router();
 const Movie = require("../models/Movie");
 const verify = require("../verifyToken");
 
-
 // search routes
 router.get("/search", verify, async (req, res) => {
-  console.log("search hii------------------");
-   const search = req.query.search;
-   console.log(search);
-   let list;
-   try {    
-     // list = await List.aggregate([
-     //   { $sample: { size: 10 } },
-     //   { $match: { type: typeQuery, genre: genreQuery } },
-     // ])
-     if (search) {
-       console.log('--------------');
-       list = await Movie.aggregate([
-         { $match: { title: search } },
-       ]);
-       console.log('list', list)
-     } else {
-       list = await Movie.aggregate([{ $sample: { size: 10 } }]);
-       console.log('list without search', list)
-     }
-     res.status(200).json(list);
-   } catch (err) {
-     res.status(500).json(err);
-   }
- });
+  const search = req.query.search;
+  let list;
+  try {
+    if (search) {
+      console.log("--------------");
+      list = await Movie.aggregate([{ $match: { title: search } }]);
+      console.log("list", list);
+    } else {
+      list = await Movie.aggregate([{ $sample: { size: 10 } }]);
+      console.log("list without search", list);
+    }
+    res.status(200).json(list);
+  } catch (err) {
+    res.status(500).json(err);
+  }
+});
 //CREATE
 
 router.post("/", verify, async (req, res) => {
@@ -49,7 +40,7 @@ router.post("/", verify, async (req, res) => {
 //UPDATE
 
 router.put("/update/:id", verify, async (req, res) => {
-  console.log("-- update movie--",req);
+  console.log("-- update movie--", req);
   if (req.user.isAdmin) {
     try {
       const updatedMovie = await Movie.findByIdAndUpdate(

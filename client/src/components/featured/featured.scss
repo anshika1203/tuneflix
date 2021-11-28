@@ -1,14 +1,14 @@
 @import "../../app.scss";
 
 .featured {
-  height: 76vh;
+  height: 45rem;
   position: relative;
 
   .category {
     position: absolute;
     top: 80px;
     left: 50px;
-    font-size: 30px;
+    font-size: 20px;
     font-weight: 500;
     color: white;
     display: flex;
@@ -74,6 +74,8 @@
         &.play {
           background-color: white;
           color: var(--main-color);
+          display: flex;
+          align-items: center;
         }
 
         &.more {

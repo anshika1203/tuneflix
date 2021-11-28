@@ -79,22 +79,27 @@
   //   }
   // }
 }
-.itemInfo{
+.itemInfo {
   color: gray;
- //box-shadow: 10px 10px 5px rgb(20, 20, 20);
-
+  //box-shadow: 10px 10px 5px rgb(20, 20, 20);
 }
 .itemInfoTop {
-        display: flex;
-        align-items: center;
-        margin-bottom: 10px;
-        font-size: 14px;
-        font-weight: 600;
-        color: gray;
-
-        .limit {
-          border: 1px solid gray;
-          padding: 1px 3px;
-          margin: 0 10px;
-        }
-      }
+  display: flex;
+  align-items: center;
+  margin-bottom: 10px;
+  font-size: 14px;
+  font-weight: 600;
+  color: white;
+  .title{
+    margin-top: 1rem;
+    color: white;
+  }
+  .limit {
+    border: 1px solid white;
+    padding: 1px 3px;
+    margin: 0 10px;
+  }
+}
+.mt1 {
+  margin-top: 1rem;
+}

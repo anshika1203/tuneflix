@@ -5,43 +5,26 @@ import Searched from "../../components/search/Searched";
 import List from "../../components/list/List";
 import { useEffect, useState } from "react";
 import axios from "axios";
-
+import { Divider } from "antd";
 const Home = ({ type }) => {
   const [lists, setLists] = useState([]);
   const [searchLists, setSearchLists] = useState([]);
   const [genre, setGenre] = useState(null);
-  
-  
-
- 
 
   useEffect(() => {
     const getRandomLists = async () => {
       try {
-        const res = await axios.get('lists/getList', 
-        {
+        const res = await axios.get("lists/getList", {
           headers: {
             token:
-            "Bearer "+JSON.parse(localStorage.getItem("user")).accessToken,
+              "Bearer " + JSON.parse(localStorage.getItem("user")).accessToken,
           },
           params: {
             type,
-            "genre": genre? genre: ''
-          }
+            genre: genre ? genre : "",
+          },
         });
-       
-        // const res = await axios.get(
-        //   `lists${type ? "?type=" + type : ""}${
-        //     genre ? "&genre=" + genre : ""
-        //   }`,
-        //   {
-        //     headers: {
-        //       token:
-        //       "Bearer "+JSON.parse(localStorage.getItem("user")).accessToken,
-        //     },
-        //   }
-        // );
-        console.log(res,'response');
+        console.log(res, "response");
         setLists(res?.data);
       } catch (err) {
         console.log(err);
@@ -50,17 +33,19 @@ const Home = ({ type }) => {
     getRandomLists();
   }, [type, genre]);
 
-  // console.log(lists, "--");
-
-  console.log("search at home.jsx", searchLists);
   return (
     <div className="home">
-      <Navbar setSearchLists={setSearchLists}/>
+      <Navbar setSearchLists={setSearchLists} />
       <Featured type={type} setGenre={setGenre} />
-      <Searched list={searchLists}/>
-      {lists.map((list) => (
-        <List list={list} />
-      ))}
+      <Searched list={searchLists} />
+      {lists.map((list) => {
+        return (
+          <>
+            <List list={list} />
+            <Divider />
+          </>
+        );
+      })}
     </div>
   );
 };

@@ -1,12 +1,12 @@
-import { AiOutlineSearch } from "react-icons/ai";
-import { useContext, useState, useEffect } from "react";
+import { useContext, useState } from "react";
 import "./navbar.scss";
 import { Link } from "react-router-dom";
 import { AuthContext } from "../../authContext/AuthContext";
 import { logout } from "../../authContext/AuthActions";
 import Logo from ".././../logo.png";
 import axios from "axios";
-
+import { Input, Button, Space } from "antd";
+const { Search } = Input;
 const Navbar = ({ setSearchLists }) => {
   const [isScrolled, setIsScrolled] = useState(false);
   const { dispatch } = useContext(AuthContext);
@@ -16,11 +16,7 @@ const Navbar = ({ setSearchLists }) => {
     setIsScrolled(window.pageYOffset === 0 ? false : true);
     return () => (window.onscroll = null);
   };
-  const handleChange = (e) => {
-    e.preventDefault();
-    console.log(e.target.value);
-    setSearch(e.target.value);
-  };
+
 
   const getSearchCall = async () => {
     const res = await axios.get("movies/search", {
@@ -36,7 +32,7 @@ const Navbar = ({ setSearchLists }) => {
     setSearchLists(res?.data);
     setSearch("");
   };
-
+  const onSearch = (value) => console.log(value);
   console.log(search);
   return (
     <div className={isScrolled ? "navbar scrolled" : "navbar"}>
@@ -53,28 +49,24 @@ const Navbar = ({ setSearchLists }) => {
             <span className="navbarmainLinks">Movies</span>
           </Link>
         </div>
-        <div className="right">
-          <input
-            class="form-control mr-sm-2"
-            type="search"
-            placeholder="Search"
-            aria-label="Search"
-            name="search"
-            onChange={handleChange}
-            value={search}
-          />
-          <button
-            class="btn btn-outline-success my-2 my-sm-0"
-            onClick={getSearchCall}
-          >
-            <AiOutlineSearch />
-          </button>
 
-          <div className="profile">
-            <div className="options">
-              <span onClick={() => dispatch(logout())}>Logout</span>
-            </div>
-          </div>
+        <div className="right">
+          <Space>
+            <Search
+              placeholder="input search text"
+              allowClear
+              enterButton="Search"
+              onSearch={getSearchCall}
+              style={{backgroundColor:'red',color:'white'}}
+            />
+            <Button
+              style={{ backgroundColor: "red", color: "white" }}
+              onClick={() => dispatch(logout())}
+              danger
+            >
+              Primary
+            </Button>
+          </Space>
         </div>
       </div>
     </div>
