@@ -5,11 +5,10 @@ import { useEffect, useMemo, useState } from "react";
 import axios from "axios";
 import { useHistory } from "react-router-dom";
 
-export default function Home() {
+const  Home=()=> {
   console.log("page rendered");
   const history = useHistory();
   const isAdmin = localStorage.getItem("user");
-  console.log(" hiii", isAdmin);
 
   const MONTHS = useMemo(
     () => [
@@ -65,3 +64,4 @@ export default function Home() {
     </div>
   );
 }
+export default Home;
