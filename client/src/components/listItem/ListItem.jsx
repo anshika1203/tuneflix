@@ -9,13 +9,12 @@ import { Link } from "react-router-dom";
 
 
 export default function ListItem({ index, item }) {
+  console.log("item rendered", item)
   const [isHovered, setIsHovered] = useState(false);
   const [movie, setMovie] = useState({});
-  
+
   useEffect(() => {
-    if(index === 1){
-      setMovie(item);
-    }else{
+   
     const getMovie = async () => {
       try {
         const res = await axios.get("/movies/find/" + item, {
@@ -25,14 +24,16 @@ export default function ListItem({ index, item }) {
           },
         });
         setMovie(res.data);
+        console.log(res.data, '##');
       } catch (err) {
         console.log(err);
       }
     };
     getMovie();
-  }
+  
   }, [item]);
 
+  console.log(movie);
   return (
 
     <Card
@@ -63,34 +64,6 @@ export default function ListItem({ index, item }) {
             </div>
   
   </Card>
-    // <Link to={{ pathname: "/watch", movie: movie }}>
-    //   <div
-    //     className="listItem"
-    //     style={{ left: isHovered && index * 225 - 50 + index * 2.5 }}
-    //     onMouseEnter={() => setIsHovered(true)}
-    //     onMouseLeave={() => setIsHovered(false)}
-    //   >
-    //     <img src={movie?.imgSm} alt="" />
-    //     {isHovered && (
-    //       <>
-    //         <video src={movie?.trailer} autoPlay={true} loop />
-    //         <div className="itemInfo">
-    //           <div className="icons">
-    //             <PlayArrow className="icon" />
-               
-    //           </div>
-    //           <div  className="itemInfoTop"><h3>{movie?.title}</h3></div>
-    //           <div className="itemInfoTop">
-    //             <span>{movie?.duration}</span>
-    //             <span className="limit">+{movie?.limit}</span>
-    //             <span>{movie?.year}</span>
-    //           </div>
-    //           <div className="desc">{movie?.desc}</div>
-    //           <div className="genre">{movie?.genre}</div>
-    //         </div>
-    //       </>
-    //     )}
-    //   </div>
-    // </Link>
+  
   );
 }
