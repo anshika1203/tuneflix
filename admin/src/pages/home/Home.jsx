@@ -1,20 +1,16 @@
 import Chart from "../../components/chart/Chart";
-import FeaturedInfo from "../../components/featuredInfo/FeaturedInfo";
 import "./home.css";
-import { userData } from "../../dummyData";
 import WidgetSm from "../../components/widgetSm/WidgetSm";
-import WidgetLg from "../../components/widgetLg/WidgetLg";
 import { useEffect, useMemo, useState } from "react";
 import axios from "axios";
-import { useHistory} from 'react-router-dom'
+import { useHistory } from "react-router-dom";
 
 export default function Home() {
   console.log("page rendered");
   const history = useHistory();
-  const isAdmin = localStorage.getItem('user');
-  console.log(" hiii",isAdmin);
+  const isAdmin = localStorage.getItem("user");
+  console.log(" hiii", isAdmin);
 
-  
   const MONTHS = useMemo(
     () => [
       "Jan",
@@ -35,12 +31,7 @@ export default function Home() {
 
   const [userStats, setUserStats] = useState([]);
 
- 
   useEffect(() => {
-    if(isAdmin === null) {
-      console.log('naklla');
-//history.push('/login');
-    }
     const getStats = async () => {
       try {
         const res = await axios.get("/users/stats", {
@@ -67,11 +58,9 @@ export default function Home() {
 
   return (
     <div className="home">
-      <FeaturedInfo />
       <Chart data={userStats} title="User Analytics" grid dataKey="New User" />
       <div className="homeWidgets">
         <WidgetSm />
-        <WidgetLg />
       </div>
     </div>
   );

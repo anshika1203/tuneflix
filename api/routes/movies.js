@@ -48,7 +48,8 @@ router.post("/", verify, async (req, res) => {
 
 //UPDATE
 
-router.put("/:id", verify, async (req, res) => {
+router.put("/update/:id", verify, async (req, res) => {
+  console.log("-- update movie--",req);
   if (req.user.isAdmin) {
     try {
       const updatedMovie = await Movie.findByIdAndUpdate(

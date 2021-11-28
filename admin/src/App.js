@@ -19,7 +19,8 @@ import ListList from "./pages/listList/ListList";
 import List from "./pages/list/List";
 import NewList from "./pages/newList/NewList";
 import MovieList from "./pages/movieList/MovieList";
-import { Movie } from "@material-ui/icons";
+import MovieEdit from "./pages/MovieEdit/EditMovie";
+
 import NewMovie from "./pages/newMovie/NewMovie";
 
 function App() {
@@ -28,7 +29,6 @@ function App() {
   const isAdmin = localStorage.getItem('user');
   console.log(isAdmin, "isAdmin");
   if(isAdmin === 'null') {
-    console.log('hii')
     window.location.replace('localhost:4000/login')
    //window.location.href('/login');
   }
@@ -57,7 +57,7 @@ function App() {
                 <MovieList />
               </Route>
               <Route path="/movie/:movieId">
-                <Movie />
+                <MovieEdit />
               </Route>
               <Route path="/newMovie">
                 <NewMovie />

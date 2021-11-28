@@ -1,6 +1,7 @@
 import React from "react";
 import ReactDOM from "react-dom";
 import App from "./App";
+import 'antd/dist/antd.css';
 import { AuthContextProvider } from "./context/authContext/AuthContext";
 import { MovieContextProvider } from "./context/movieContext/MovieContext";
 import { ListContextProvider } from "./context/listContext/ListContext";

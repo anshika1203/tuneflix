@@ -51,9 +51,10 @@ export default function ListList() {
         disableSelectionOnClick
         columns={columns}
         pageSize={8}
-        checkboxSelection
         getRowId={(r) => r._id}
       />
+
+
     </div>
   );
 }
