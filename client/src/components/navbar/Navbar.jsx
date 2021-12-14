@@ -64,7 +64,7 @@ const Navbar = ({ setSearchLists }) => {
               onClick={() => dispatch(logout())}
               danger
             >
-              Primary
+              Logout
             </Button>
           </Space>
         </div>

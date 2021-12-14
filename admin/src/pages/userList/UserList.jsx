@@ -33,7 +33,7 @@ export default function UserList() {
       title: "subscribed",
       dataIndex: "subscribed",
       key: "subscribed",
-    },
+    },   
   ];
 
   return (

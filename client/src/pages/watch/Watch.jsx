@@ -27,7 +27,7 @@ export default function Watch() {
         />
       ) : (
         <div className="subscription">
-          <h3>Please Subscribe To Watch Your Favourite List..</h3>
+          <h3 style={{color:'white'}}>Please Subscribe To Watch Your Favourite List..</h3>
           <div className="gpay">
           <GooglePayButton
             environment="TEST"

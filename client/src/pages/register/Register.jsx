@@ -58,7 +58,7 @@ export default function Register() {
           <div className="section flex-space-around">
             <div className="formTag">
               <div className="form">
-                <div className="formTitle">
+                <div className="formTitle text-light">
                   <h3>Register</h3>
                 </div>
                 <form onSubmit={handleSubmit}>

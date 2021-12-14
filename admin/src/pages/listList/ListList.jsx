@@ -6,6 +6,7 @@ import { useContext, useEffect } from "react";
 import { ListContext } from "../../context/listContext/ListContext";
 import { deleteList, getLists } from "../../context/listContext/apiCalls";
 
+import { Row, Col, Table } from "antd";
 export default function ListList() {
   const { lists, dispatch } = useContext(ListContext);
 
@@ -16,29 +17,36 @@ export default function ListList() {
   const handleDelete = (id) => {
     deleteList(id, dispatch);
   };
-
   const columns = [
-    { field: "_id", headerName: "ID", width: 250 },
-    { field: "title", headerName: "title", width: 250 },
-    { field: "genre", headerName: "Genre", width: 150 },
-    { field: "type", headerName: "type", width: 150 },
     {
-      field: "action",
-      headerName: "Action",
-      width: 150,
-      renderCell: (params) => {
+      title: "ID",
+      dataIndex: "_id",
+      key: "_id",
+    },
+    {
+      title: "title",
+      dataIndex: "title",
+      key: "title",
+    },
+    {
+      title: "genre",
+      dataIndex: "genre",
+      key: "genre",
+    },
+    {
+      title: "type",
+      dataIndex: "type",
+      key: "type",
+    },
+    {
+      title: "Action",
+      dataIndex: "Action",
+      render: (params) => {
         return (
-          <>
-            <Link
-              to={{ pathname: "/list/" + params.row._id, list: params.row }}
-            >
-              <button className="productListEdit">Edit</button>
-            </Link>
-            <DeleteOutline
-              className="productListDelete"
-              onClick={() => handleDelete(params.row._id)}
-            />
-          </>
+          <DeleteOutline
+            className="productListDelete"
+            onClick={() => handleDelete(params.row._id)}
+          />
         );
       },
     },
@@ -46,15 +54,11 @@ export default function ListList() {
 
   return (
     <div className="productList">
-      <DataGrid
-        rows={lists}
-        disableSelectionOnClick
-        columns={columns}
-        pageSize={8}
-        getRowId={(r) => r._id}
-      />
-
-
+      <Row justify="center">
+        <Col span={20}>
+          <Table columns={columns} dataSource={lists} />
+        </Col>
+      </Row>
     </div>
   );
 }
